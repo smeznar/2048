@@ -7,10 +7,29 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.startTiles     = 2;
 
   this.setup();
+  this.setupListeners();
   this.inputManager.on("move", this.grid.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
   this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 }
+
+GameManager.prototype.setupListeners = function(){
+  this.runAi = false;
+  gm = this;
+  $(document).on('click', '.ai-button', function (event) {
+    if(!gm.runAi){
+      gm.runAi = true;
+      gm.numOfGames = $('#num-of-games').val();
+      gm.aiController.makeAMove(gm.grid, gm.numOfGames);
+      $('#ai-btn').empty();
+      $('#ai-btn').append("Stop AI");
+    } else {
+      gm.runAi = false;
+      $('#ai-btn').empty();
+      $('#ai-btn').append("Start AI");
+    }
+  });
+};
 
 // Restart the game
 GameManager.prototype.restart = function () {
@@ -55,7 +74,6 @@ GameManager.prototype.setup = function () {
   this.aiController = new AIController(this);
   // Update the actuator
   this.actuate(this.grid);
-  this.aiController.makeAMove(this.grid);
 };
 
 // Sends the updated grid to the actuator
@@ -81,6 +99,13 @@ GameManager.prototype.actuate = function (grid) {
     bestScore:  this.storageManager.getBestScore(),
     terminated: this.isGameTerminated()
   });
+
+  if(this.runAi && !this.over){
+    gm = this
+    setTimeout(function(){
+      gm.aiController.makeAMove(gm.grid,gm.numOfGames);
+    }, 100);
+  }
 };
 
 // Represent the current game as an object

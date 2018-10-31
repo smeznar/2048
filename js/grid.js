@@ -315,7 +315,7 @@ Grid.prototype.addStartTiles = function () {
 };
 
 Grid.prototype.copy = function(){
-  newGrid = new Grid(this.size);
+  newGrid = new Grid(this.size, this.manager);
   for (var x = 0; x < this.size; x++) {
     for (var y = 0; y < this.size; y++) {
       if (this.cells[x][y]) {
