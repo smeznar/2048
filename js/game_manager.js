@@ -122,3 +122,13 @@ GameManager.prototype.serialize = function () {
 GameManager.prototype.endGame = function(){
   this.storageManager.clearGameState();
 }
+/*
+writeFile = function(score){
+  var fh = fopen("c:\\MyFile.txt", 3); // Open the file for writing
+  if(fh!=-1){
+    var str = score + "";
+    fwrite(fh, str); // Write the string to a file
+    fclose(fh); // Close the file
+  }
+}
+*/
