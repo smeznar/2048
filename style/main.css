@@ -781,3 +781,20 @@ hr {
     margin-top: 90px !important; }
   .game-message .lower {
     margin-top: 30px !important; } }
+
+/* New Style*/
+
+.num-of-games-input{
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  font-size: unset;
+  color: #f9f6f2;
+  background: #8f7a66;
+  border: none;
+  border-radius: 3px;
+  height: 38px;
+  text-align: center;
+  width: 150px;
+}

@@ -124,7 +124,7 @@ GameManager.prototype.endGame = function(){
 }
 /*
 writeFile = function(score){
-  var fh = fopen("c:\\MyFile.txt", 3); // Open the file for writing
+  var fh = fopen("scores.txt", 3); // Open the file for writing
   if(fh!=-1){
     var str = score + "";
     fwrite(fh, str); // Write the string to a file
