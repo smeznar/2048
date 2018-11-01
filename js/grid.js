@@ -6,7 +6,12 @@ function Grid(size, gameManger, previousState) {
   this.won = gameManger.won;
   this.over = gameManger.over;
   this.startTiles = 2;
+  this.bestTile = 2;
 }
+
+Grid.prototype.getCells = function () {
+  return this.cells;
+};
 
 // Build a grid of the specified size
 Grid.prototype.empty = function () {
@@ -167,6 +172,11 @@ Grid.prototype.move = function (direction, isAutomatic) {
           // Update the score
           self.score += merged.value;
 
+          // Set best tile
+          if(merged.value > self.bestTile){
+            self.bestTile = merged.value; 
+          }
+
           // The mighty 2048 tile
           if (merged.value === 2048) self.won = true;
         } else {
@@ -324,4 +334,17 @@ Grid.prototype.copy = function(){
     }
   }
   return newGrid;
+}
+
+Grid.prototype.isDifferent = function(grid){
+  for (var x = 0; x < this.size; x++) {
+    for (var y = 0; y < this.size; y++) {
+      if ((this.cells[x][y] && !grid.getCells()[x][y])
+         || (!this.cells[x][y] && grid.getCells()[x][y])
+         || (this.cells[x][y] && grid.getCells()[x][y]) && this.cells[x][y].getValue()!=grid.getCells()[x][y].getValue()) {
+        return true;
+      }
+    }
+  }
+  return false;
 }

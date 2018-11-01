@@ -1,43 +1,67 @@
 function AIController(gameManager){
     this.manager = gameManager;
+    this.typeOfSelection = 0;
+    this.numOfRandomPlays = 100;
 }
 
-AIController.prototype.makeAMove = function(grid,numOfRandomPlays){
+moveBias = {
+    2: [1,1,1,1],
+    // Treba se razmislit
+}
+
+AIController.prototype.setTypeOfSelection = function(type){
+    this.typeOfSelection = type;
+}
+
+AIController.prototype.setNumOfGames = function(num){
+    this.numOfRandomPlays = num;
+}
+
+AIController.prototype.makeAMove = function(grid){
     this.grid = grid;
-    let move = this.selectMove(grid,numOfRandomPlays);
+    let move = 0;
+    if(this.typeOfSelection == 3){
+        move = Math.floor(Math.random() * 4);
+    } else {
+        move = this.selectMove(grid);
+    }
     this.grid.move(move,true);
     this.manager.actuate(this.grid);
 }
 
-AIController.prototype.selectMove = function(grid,numOfRandomPlays){
+AIController.prototype.selectMove = function(grid){
     let moves = new Array(4);
     for(let i=0;i<4;i++){
-        moves[i] = this.getMoveScore(i, grid, numOfRandomPlays);
+        moves[i] = this.getMoveScore(i, grid);
     }
-    let max = 0;
+    let minmax = 0;
     let index = 0;
     for(let i=0;i<moves.length;i++){
-        if(max < moves[i]){
-            max = moves[i];
+        if(minmax < moves[i]){
+            minmax = moves[i];
             index = i;
         }
     }
     return index;
 }
 
-AIController.prototype.getMoveScore = function(move, grid, numOfRandomPlays){
+AIController.prototype.getMoveScore = function(move, grid){
     let total = 0;
-    for(let i=0;i<numOfRandomPlays;i++){
+    for(let i=0;i<this.numOfRandomPlays;i++){
         let newGrid = grid.copy();
         newGrid.move(move,true);
-        total += this.playRandomly(newGrid);
+        if(grid.isDifferent(newGrid)){
+            total += this.playRandomly(newGrid);
+        } else {
+            total += 0;
+        }
     }
     return total;
 }
 
 AIController.prototype.playRandomly = function(grid){
     while(!grid.over){
-        grid.move(Math.floor((Math.random() * 4)),true);
+        grid.move(Math.floor(Math.random() * 4),true);
     }
     return grid.score;
 }

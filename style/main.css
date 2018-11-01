@@ -798,3 +798,15 @@ hr {
   text-align: center;
   width: 150px;
 }
+
+.ai-container{
+  width: 100%;
+  border-width: initial;
+  border-color: #8f7a66;
+  border-radius: 3px;
+  border-style: double;
+}
+
+.disabled-input{
+  color: #f9f6f255;
+}

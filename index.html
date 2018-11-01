@@ -26,11 +26,22 @@
       </div>
     </div>
 
-    <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
     <div class="above-game">
+      <p class="game-intro">Join the numbers and get to the <strong>2048 tile!</strong></p>
+      <a class="restart-button">New Game</a>
+    </div>
+    <div class="ai-container">
+      <h3 style="margin: 2px 0px 5px 2px">AI settings</h3>
       <a id="ai-btn" class="ai-button">Start AI</a>
       <input id="num-of-games" class="num-of-games-input" type="number" value="100">
-      <a class="restart-button">New Game</a>
+      <table>
+        <tr>
+          <td>Type of move selection</td>
+          <td><input type="radio" name="selection-type" value="1" checked="checked">Best</td>
+          <!--<td><input type="radio" name="selection-type" value="2">Best with bias</td>-->
+          <td><input type="radio" name="selection-type" value="3">Random</td>
+        </tr>
+      </table>
     </div>
 
     <div class="game-container">
@@ -76,15 +87,32 @@
 
     <p class="game-explanation">
       <strong class="important">How to play:</strong> Use your <strong>arrow keys</strong> to move the tiles. When two tiles with the same number touch, they <strong>merge into one!</strong>
-      or press the <strong>Start AI</strong> button and see how far it can get.
+      <hr>
+      You can also try winning the game with AI. <br>
+      Select the type of AI selection: <br>
+      <ul>
+        <li>
+          Best: plays random games in the background and selects the best one.
+        </li>
+        <li>
+          Best with bias: similar to best but with bias to some moves (predetermined or chosen). TODO
+        </li>
+        <li>
+          Random: plays random moves.
+        </li>
+      </ul>
+      You can also select the number of games played in each direction with best selection types. <br>
+      When your happy with the configuration press the <strong>Start AI</strong> button and see how far it can get.
     </p>
     <hr>
     <p>
-    <strong class="important">Note:</strong> This site is the official version of 2048. You can play it on your phone via <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
+    <strong class="important">Note:</strong> The official version of 2048 can be found on <a href="http://git.io/2048">http://git.io/2048.</a> All other apps or sites are derivatives or fakes, and should be used with caution.
     </p>
     <hr>
     <p>
-    Created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+    Game created by <a href="http://gabrielecirulli.com" target="_blank">Gabriele Cirulli.</a> Based on <a href="https://itunes.apple.com/us/app/1024!/id823499224" target="_blank">1024 by Veewo Studio</a> and conceptually similar to <a href="http://asherv.com/threes/" target="_blank">Threes by Asher Vollmer.</a>
+    <br>
+    AI created by <a href="https://github.com/smeznar" target="_blank">Sebastian Mežnar</a>.
     </p>
   </div>
 

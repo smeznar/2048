@@ -10,17 +10,29 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.setupListeners();
   this.inputManager.on("move", this.grid.move.bind(this));
   this.inputManager.on("restart", this.restart.bind(this));
-  this.inputManager.on("keepPlaying", this.keepPlaying.bind(this));
 }
 
 GameManager.prototype.setupListeners = function(){
   this.runAi = false;
   gm = this;
+  $("input[name='selection-type']").on("click", function() {
+    gm.aiController.setTypeOfSelection($('input[name="selection-type"]:checked').val());
+    if(gm.aiController.typeOfSelection == 3){
+      numOfGamesInputFiled = $('#num-of-games');
+      numOfGamesInputFiled.addClass("disabled-input");
+      numOfGamesInputFiled.prop('disabled', true);
+    } else {
+      numOfGamesInputFiled = $('#num-of-games');
+      numOfGamesInputFiled.removeClass("disabled-input");
+      numOfGamesInputFiled.prop('disabled', false);
+    }
+  });
+
   $(document).on('click', '.ai-button', function (event) {
     if(!gm.runAi){
       gm.runAi = true;
-      gm.numOfGames = $('#num-of-games').val();
-      gm.aiController.makeAMove(gm.grid, gm.numOfGames);
+      gm.aiController.numOfGames = $('#num-of-games').val();
+      gm.aiController.makeAMove(gm.grid);
       $('#ai-btn').empty();
       $('#ai-btn').append("Stop AI");
     } else {
@@ -103,8 +115,8 @@ GameManager.prototype.actuate = function (grid) {
   if(this.runAi && !this.over){
     gm = this
     setTimeout(function(){
-      gm.aiController.makeAMove(gm.grid,gm.numOfGames);
-    }, 100);
+      gm.aiController.makeAMove(gm.grid);
+    }, 50);
   }
 };
 
