@@ -1101,6 +1101,7 @@ hr {
   box-sizing: content-box;
 }
 
+/*
 a:not([href]):not([tabindex]){
   color: #f9f6f2;
-}
+}*/
