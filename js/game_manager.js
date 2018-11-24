@@ -31,7 +31,7 @@ GameManager.prototype.setupListeners = function(){
   $(document).on('click', '.ai-button', function (event) {
     if(!gm.runAi){
       gm.runAi = true;
-      gm.aiController.numOfGames = $('#num-of-games').val();
+      gm.aiController.numOfRandomPlays = $('#num-of-games').val();
       gm.aiController.makeAMove(gm.grid);
       $('#ai-btn').empty();
       $('#ai-btn').append("Stop AI");
