@@ -4,6 +4,8 @@ function GameManager(size, InputManager, Actuator, StorageManager) {
   this.storageManager = new StorageManager;
   this.actuator       = new Actuator;
 
+  this.numOfRandomPlays = 100;
+  this.typeOfSelection = 1;
   this.startTiles     = 2;
 
   this.setup();
@@ -16,7 +18,8 @@ GameManager.prototype.setupListeners = function(){
   this.runAi = false;
   gm = this;
   $("input[name='selection-type']").on("click", function() {
-    gm.aiController.setTypeOfSelection($('input[name="selection-type"]:checked').val());
+    gm.typeOfSelection = $('input[name="selection-type"]:checked').val();
+    gm.aiController.typeOfSelection = gm.typeOfSelection;
     if(gm.aiController.typeOfSelection == 3){
       numOfGamesInputFiled = $('#num-of-games');
       numOfGamesInputFiled.addClass("disabled-input");
@@ -31,7 +34,8 @@ GameManager.prototype.setupListeners = function(){
   $(document).on('click', '.ai-button', function (event) {
     if(!gm.runAi){
       gm.runAi = true;
-      gm.aiController.numOfRandomPlays = $('#num-of-games').val();
+      gm.numOfRandomPlays = $('#num-of-games').val()
+      gm.aiController.numOfRandomPlays = gm.numOfRandomPlays;
       gm.aiController.makeAMove(gm.grid);
       $('#ai-btn').empty();
       $('#ai-btn').append("Stop AI");
@@ -83,7 +87,7 @@ GameManager.prototype.setup = function () {
     // Add the initial tiles
     this.grid.addStartTiles();
   }
-  this.aiController = new AIController(this);
+  this.aiController = new AIController(this, this.numOfRandomPlays, this.typeOfSelection);
   // Update the actuator
   this.actuate(this.grid);
 };

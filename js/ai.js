@@ -1,20 +1,12 @@
-function AIController(gameManager){
+function AIController(gameManager, numOfRandomPlays = 100, typeOfSelection = 1){
     this.manager = gameManager;
-    this.typeOfSelection = 0;
-    this.numOfRandomPlays = 100;
+    this.typeOfSelection = typeOfSelection;
+    this.numOfRandomPlays = numOfRandomPlays;
 }
 
 moveBias = {
     2: [1,1,1,1],
     // Treba se razmislit
-}
-
-AIController.prototype.setTypeOfSelection = function(type){
-    this.typeOfSelection = type;
-}
-
-AIController.prototype.setNumOfGames = function(num){
-    this.numOfRandomPlays = num;
 }
 
 AIController.prototype.makeAMove = function(grid){
