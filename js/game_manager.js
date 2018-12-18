@@ -116,14 +116,14 @@ GameManager.prototype.actuate = function (grid) {
     terminated: this.isGameTerminated()
   });
 
-  if(this.over){
-    console.log(this.score + " " + this.grid.bestTile);
-    gm = this;
-    setTimeout(function(){
-      gm.restart();
-    }, 1000);
-    //$('#game-over-id').removeClass('game-over');
-  }
+  // if(this.over){
+  //   console.log(this.score + " " + this.grid.bestTile);
+  //   gm = this;
+  //   setTimeout(function(){
+  //     gm.restart();
+  //   }, 1000);
+  //   //$('#game-over-id').removeClass('game-over');
+  // }
 
   if(this.runAi && !this.over){
     gm = this
